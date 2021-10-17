@@ -1,7 +1,7 @@
 from django import forms
-from .models import newPollingUnit
+from .models import newPollsUnit
 
 class PollForm(forms.ModelForm):
     class Meta:
-        model = newPollingUnit
+        model = newPollsUnit
         fields = '__all__'

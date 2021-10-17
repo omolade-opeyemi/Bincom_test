@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -37,10 +37,10 @@ def resultPage(request):
                 puid.append(i.polling_unit_uniqueid)
                 pa.append(i.party_abbreviation)
                 score.append(i.party_score)
-            print(sum(score))
+           
         total = sum(score)
         context={'res':res, 'puid':puid, 'pa':pa, 'score':score, 'total':total}
-        print(x)
+        
         return render(request, 'result.html',context)
         
     return render(request, 'result.html')
@@ -52,7 +52,16 @@ def newpollPage(request):
         form=PollForm(request.POST)
         if form.is_valid():
             form.save()
-    result = newPollingUnit.objects.all()
-    return render(request, 'new_polls.html', {'form':form})
+            return redirect('new_polls')
+
+    pdp = newPollsUnit.objects.filter(vote='PDP').count()
+    dpp = newPollsUnit.objects.filter(vote='DPP').count()
+    acn = newPollsUnit.objects.filter(vote='ACN').count()
+    ppa = newPollsUnit.objects.filter(vote='PPA').count()
+    cdc = newPollsUnit.objects.filter(vote='CDC').count()
+    jp = newPollsUnit.objects.filter(vote='JP').count()
+    total = sum([pdp,dpp,acn,ppa,cdc,jp])
+    context = {'pdp':pdp, 'dpp':dpp, 'acn':acn, 'ppa':ppa, 'cdc':cdc, 'jp':jp, 'form':form, 'total':total}
+    return render(request, 'new_polls.html', context)
     
     

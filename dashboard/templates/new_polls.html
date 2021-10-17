@@ -41,9 +41,53 @@
                 {%csrf_token%}
                 {{form.as_p}}
                 <input type="submit">
-            </form>
-
-        </div>    
+            </form>  
+        </div>
+        
+        <div class="container">
+          <div class="row">
+            <div class=col-sm>
+              <h4>lga_id</h4>
+                <li>8</li>
+            </div>
+            <div class=col-sm>
+              <h4>polling_unit_uniqueid</h4>
+              <ul>
+                
+                    <li>13</li>
+                
+                </ul>
+            </div>
+          
+            <div class="col-sm">
+              <h4>party_abbreviation</h4>
+              <ul>
+                <li>PDP</li>
+                <li>DPP</li>
+                <li>ACN</li>
+                <li>PPA</li>
+                <li>CDC</li>
+                <li>JP</li>
+                
+                </ul>
+            </div>
+          
+            <div class="col-sm">
+              <h4>party_score</h4>
+              <ul>
+                <li>{{ pdp|safe }}</li>
+                <li>{{ dpp|safe }}</li>
+                <li>{{ acn|safe }}</li>
+                <li>{{ ppa|safe }}</li>
+                <li>{{ cdc|safe }}</li>
+                <li>{{ jp|safe }}</li>
+                
+              </ul>
+            </div>
+          </div>
+          <br>
+          <H1>TOTAL VOTE: {{total}}</H1>
+        </div>
     
 
     <!-- Optional JavaScript; choose one of the two! -->

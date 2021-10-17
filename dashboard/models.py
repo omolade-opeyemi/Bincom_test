@@ -135,15 +135,18 @@ class Ward(models.Model):
         managed = False
         db_table = 'ward'
 
-class newPollingUnit(models.Model):
-    result_id = models.AutoField(primary_key=True)
-    polling_unit_uniqueid = models.CharField(max_length=50)
-    party_abbreviation = models.CharField(max_length=4)
-    party_score = models.IntegerField()
-    entered_by_user = models.CharField(max_length=50)
-    date_entered = models.DateTimeField()
-    user_ip_address = models.CharField(max_length=50)
-
-    class Meta:
-        managed = False
-        db_table = 'announced_pu_results'
+class newPollsUnit(models.Model):
+    CATEGORY=(
+        ('PDP', 'PDP'),
+        ('DPP', 'DPP'),
+        ('ACN', 'ACN'),
+        ('PPA', 'PPA'),
+        ('CDC', 'CDC'),
+        ('JP', 'JP'),
+    )
+    voters_reg_no = models.CharField(max_length=200, blank=True)
+    vote = models.CharField(max_length=200, choices=CATEGORY)
+    date_entered = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.voters_reg_no
